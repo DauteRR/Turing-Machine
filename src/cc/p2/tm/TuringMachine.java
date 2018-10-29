@@ -24,7 +24,7 @@ public class TuringMachine
 	TreeSet<State>			states;
 	/** Σ: Input alphabet, compound by terminal symbols */
 	Alphabet				inputAlphabet;
-	/** Γ: Stack alphabet, compound by non terminal symbols */
+	/** Γ: Tape alphabet, compound by non terminal symbols */
 	Alphabet				stackAlphabet;
 	/** δ: Finite set of transitions between states */
 	TreeSet<Transition>		transitions;
