@@ -1,9 +1,11 @@
 /**
  * File containing the Transition entity definition. 
  */
-package cc.p2.tm.tmelements;
+package cc.p2.tm.TMComponents;
 
-import cc.p2.tm.tmelements.InputTape.HeaderMovement;
+import java.util.ArrayList;
+
+import cc.p2.tm.TMComponents.Tape.HeaderMovement;
 
 /**
  * Class which represents a transition of a multitape Turing Machine.
@@ -18,12 +20,12 @@ public class Transition implements Comparable<Transition>
 	State originState;
 	/** Destination state of the transition */
 	State destinationState;
-	/** Movement of each input tape header */
-	HeaderMovement[] inputTapeHeadersMovements;
+	/** Movement of each tape header */
+	ArrayList<HeaderMovement> tapeHeadersMovements;
 	/** Input symbols required in each tape */
-	Symbol[] inputSymbols;
+	ArrayList<Symbol> inputSymbols;
 	/** Symbols to write in each tape */
-	Symbol[] outputSymbols;
+	ArrayList<Symbol> outputSymbols;
 	/** Identifies each transition */
 	int	transitionID;
 	
@@ -32,18 +34,18 @@ public class Transition implements Comparable<Transition>
 	 * 
 	 * @param originState
 	 * @param destinationState
-	 * @param inputTapeHeadersMovements
+	 * @param tapeHeadersMovements
 	 * @param inputSymbols
 	 * @param outputSymbols
 	 * @param transitionID
 	 */
 	public Transition(State originState, State destinationState,
-			HeaderMovement[] inputTapeHeadersMovements, Symbol[] inputSymbols,
-			Symbol[] outputSymbols, int transitionID)
+			ArrayList<HeaderMovement> tapeHeadersMovements, ArrayList<Symbol> inputSymbols,
+			ArrayList<Symbol> outputSymbols, int transitionID)
 	{
 		this.originState = originState;
 		this.destinationState = destinationState;
-		this.inputTapeHeadersMovements = inputTapeHeadersMovements;
+		this.tapeHeadersMovements = tapeHeadersMovements;
 		this.inputSymbols = inputSymbols;
 		this.outputSymbols = outputSymbols;
 		this.transitionID = transitionID;
@@ -61,7 +63,7 @@ public class Transition implements Comparable<Transition>
 	@Override
 	public String toString()
 	{
-		return "(" + originState + ", " + inputSymbols + ", " + outputSymbols + ", " + destinationState + ", " + inputTapeHeadersMovements + ")";
+		return "(" + originState + ", " + inputSymbols + ", " + destinationState + ", " + outputSymbols  + ", " + tapeHeadersMovements + ")";
 	}
 
 	/**
@@ -83,19 +85,19 @@ public class Transition implements Comparable<Transition>
 	}
 
 	/**
-	 * Getter method for inputTapeHeadersMovements attribute.
-	 * @return inputTapeHeadersMovements
+	 * Getter method for tapeHeadersMovements attribute.
+	 * @return tapeHeadersMovements
 	 */
-	public HeaderMovement[] getInputTapeHeadersMovements()
+	public ArrayList<HeaderMovement> getTapeHeadersMovements()
 	{
-		return inputTapeHeadersMovements;
+		return tapeHeadersMovements;
 	}
 
 	/**
 	 * Getter method for inputSymbols attribute.
 	 * @return inputSymbols
 	 */
-	public Symbol[] getInputSymbols()
+	public ArrayList<Symbol> getInputSymbols()
 	{
 		return inputSymbols;
 	}
@@ -104,7 +106,7 @@ public class Transition implements Comparable<Transition>
 	 * Getter method for outputSymbols attribute.
 	 * @return outputSymbols
 	 */
-	public Symbol[] getOutputSymbols()
+	public ArrayList<Symbol> getOutputSymbols()
 	{
 		return outputSymbols;
 	}

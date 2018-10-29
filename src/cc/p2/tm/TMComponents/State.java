@@ -1,7 +1,7 @@
 /**
  * File containing the State entity definition. 
  */
-package cc.p2.tm.tmelements;
+package cc.p2.tm.TMComponents;
 
 /**
  * Class which represents a state of a Turing Machine. The state can be an

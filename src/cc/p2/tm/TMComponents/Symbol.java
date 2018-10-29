@@ -1,7 +1,7 @@
 /**
  * File containing the Symbol entity definition. 
  */
-package cc.p2.tm.tmelements;
+package cc.p2.tm.TMComponents;
 
 /**
  * Class which represents a symbol of a Turing Machine alphabet. The symbol

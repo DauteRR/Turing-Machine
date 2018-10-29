@@ -1,46 +1,46 @@
 /**
- * File containing the InputTape entity definition. 
+ * File containing the Tape entity definition. 
  */
-package cc.p2.tm.tmelements;
+package cc.p2.tm.TMComponents;
 
 import java.util.ArrayList;
 
 import cc.p2.tm.TuringMachine;
 
 /**
- * Class which represents an input tape of a multitape Turing Machine.
+ * Class which represents a tape of a multitape Turing Machine.
  * 
  * @author Daute Rodríguez Rodríguez (alu0100973914@ull.edu.es)
  * @version 1.0
  * @since 29 oct. 2018
  */
-public class InputTape
+public class Tape
 {
 	/**
-	 * Enumeration containing the available movements of an input tape header
+	 * Enumeration containing the available movements of the tape header
 	 */
 	public static enum HeaderMovement
 	{
 		LEFT, RIGHT, STAY
 	}
 
-	/** Representation of the input tape, each element is a cell */
-	ArrayList<Symbol>	inputTape;
+	/** Representation of the tape, each element is a cell */
+	ArrayList<Symbol>	tape;
 	/** Position of the read/write header */
 	int					headerPosition	= 0;
 
 	/**
 	 * Constructor.
 	 * 
-	 * @param inputTape
+	 * @param tape
 	 */
-	public InputTape(ArrayList<Symbol> inputTape)
+	public Tape(ArrayList<Symbol> tape)
 	{
-		this.inputTape = inputTape;
+		this.tape = tape;
 	}
 
 	/**
-	 * Moves the input tape header.
+	 * Moves the tape header.
 	 * 
 	 * @param movement
 	 */
@@ -56,10 +56,10 @@ public class InputTape
 		if (headerPosition < 0)
 		{
 			headerPosition = 0;
-			inputTape.add(0, TuringMachine.whiteSymbol);
-		} else if (headerPosition >= inputTape.size())
+			tape.add(0, TuringMachine.blankSymbol);
+		} else if (headerPosition >= tape.size())
 		{
-			inputTape.add(TuringMachine.whiteSymbol);
+			tape.add(TuringMachine.blankSymbol);
 		}
 	}
 
@@ -70,7 +70,7 @@ public class InputTape
 	 */
 	public Symbol readSymbol()
 	{
-		return inputTape.get(headerPosition);
+		return tape.get(headerPosition);
 	}
 
 	/**
@@ -80,6 +80,6 @@ public class InputTape
 	 */
 	public void writeSymbol(Symbol symbolToWrite)
 	{
-		inputTape.set(headerPosition, symbolToWrite);
+		tape.set(headerPosition, symbolToWrite);
 	}
 }

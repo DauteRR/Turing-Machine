@@ -1,7 +1,7 @@
 /**
  * File containing the Alphabet entity definition. 
  */
-package cc.p2.tm.tmelements;
+package cc.p2.tm.TMComponents;
 
 import java.util.Comparator;
 import java.util.Iterator;
