@@ -1,1 +1,1 @@
-a a a a b b b b c c c c
+1 0 1 0 0 0 0 1 1

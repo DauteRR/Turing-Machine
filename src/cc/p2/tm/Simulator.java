@@ -54,11 +54,13 @@ public class Simulator
 		
 		TuringMachine TM = TMParser.constructTM(args[0]);
 		
-		String[] inputStringSymbols = inputStringRepresentation.split("\\s");
 		ArrayList<Symbol> inputString = new ArrayList<Symbol>();
-		if (!inputStringRepresentation.isEmpty())
+		if (inputStringRepresentation != null)
+		{
+			String[] inputStringSymbols = inputStringRepresentation.split("\\s");
 			for (int i = 0; i < inputStringSymbols.length; ++i)
 				inputString.add(TM.getInputAlphabet().getSymbol(inputStringSymbols[i]));
+		}
 		
 		System.out.println("\n" + TM);
 		
