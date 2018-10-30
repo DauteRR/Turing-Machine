@@ -132,7 +132,12 @@ public class TMParser
 
 		Alphabet tapeAlphabet = new Alphabet(true);
 		for (String symbol : tapeAlphabetSymbols)
-			tapeAlphabet.addSymbol(new Symbol(symbol, Symbol.SymbolType.NON_TERMINAL));
+		{
+			if (!symbol.equals(blankSymbolRepresentation) && inputAlphabet.contains(inputAlphabet.getSymbol(symbol)))
+				tapeAlphabet.addSymbol(inputAlphabet.getSymbol(symbol));
+			else
+				tapeAlphabet.addSymbol(new Symbol(symbol, Symbol.SymbolType.NON_TERMINAL));
+		}
 
 		State initialState = null;
 		for (State state : states)
@@ -162,6 +167,11 @@ public class TMParser
 		{
 			line = reader.readLine();
 			amountOfTapes = (line.split("\\s").length - 2) / 3;
+			if (amountOfTapes < 1)
+			{
+				reader.close();
+				throw new IllegalArgumentException("Turing Machine needs at least one tape!");
+			}
 			transitions.add(constructTransition(
 					line, amountOfTapes, states, inputAlphabet, tapeAlphabet, 0, blankSymbol));
 		}
@@ -194,7 +204,7 @@ public class TMParser
 			Alphabet tapeAlphabet, int transitionID, Symbol blankSymbol)
 	{
 		String[] transitionTokens = line.split("\\s");
-		if (transitionTokens.length < 2 + 3 * amountOfTapes)
+		if (transitionTokens.length != 2 + 3 * amountOfTapes)
 			throw new IllegalArgumentException("Strange transition: " + line);
 
 		String originStateID = transitionTokens[0], destinationStateID = transitionTokens[amountOfTapes + 1];

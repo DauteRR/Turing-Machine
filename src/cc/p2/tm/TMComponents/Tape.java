@@ -25,19 +25,9 @@ public class Tape
 	}
 
 	/** Representation of the tape, each element is a cell */
-	ArrayList<Symbol>	tape;
+	ArrayList<Symbol>	tape = new ArrayList<Symbol>();
 	/** Position of the read/write header */
 	int					headerPosition	= 0;
-
-	/**
-	 * Constructor.
-	 * 
-	 * @param tape
-	 */
-	public Tape(ArrayList<Symbol> tape)
-	{
-		this.tape = tape;
-	}
 
 	/**
 	 * Moves the tape header.
@@ -70,6 +60,9 @@ public class Tape
 	 */
 	public Symbol readSymbol()
 	{
+		if (tape.isEmpty())
+			return TuringMachine.blankSymbol;
+		
 		return tape.get(headerPosition);
 	}
 
@@ -80,6 +73,51 @@ public class Tape
 	 */
 	public void writeSymbol(Symbol symbolToWrite)
 	{
+		if (headerPosition >= tape.size())
+			tape.add(symbolToWrite);
+		
 		tape.set(headerPosition, symbolToWrite);
+	}
+
+	@Override
+	public String toString()
+	{
+		String tapeRepresentation = "...| ";
+		
+		if (tape.size() > 0)
+		{
+			for (int i = 0; i < tape.size(); ++i)
+			{
+				if (i == headerPosition)
+					tapeRepresentation += ">";
+				tapeRepresentation += tape.get(i) + " | ";
+			}
+		} else
+			tapeRepresentation += ">. |";
+		
+		return tapeRepresentation.substring(0, tapeRepresentation.length() - 1) + "...";
+	}
+	
+	/**
+	 * Prints the content of the tape from header to right
+	 */
+	public void printFromHeaderToRight()
+	{
+		System.out.print("...| >");
+		if (headerPosition >= tape.size())
+			System.out.print(". |");
+		else
+			for (int i = headerPosition; i < tape.size(); ++i)
+				System.out.print(tape.get(i) + " | ");
+		System.out.println("...");
+	}
+
+	/**
+	 * Setter method for tape attribute.
+	 * @param tape 
+	 */
+	public void setTapeContent(ArrayList<Symbol> tape)
+	{
+		this.tape = tape;
 	}
 }

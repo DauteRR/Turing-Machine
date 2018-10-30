@@ -1,0 +1,13 @@
+# L = { a^i b^i c^i / i > 0}
+q0 q1 q2 q3
+a b c
+a b c .
+q0
+.
+q3
+q0 a . . q0 a a . R R S
+q0 b . . q1 b . b R S R
+q1 b . . q1 b . b R S R
+q1 c . . q2 c . . S L L
+q2 c a b q2 c . . R L L
+q2 . . . q3 . . . S S S

@@ -6,6 +6,7 @@ package cc.p2.tm;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import cc.p2.tm.AuxiliaryTools.TMParser;
@@ -30,35 +31,38 @@ public class Simulator
 	 */
 	public static void main(String[] args) throws IOException
 	{
-		String inputString = "";
-		if (args.length < 1)
+		String inputStringRepresentation = "";
+		if (args.length < 2)
 		{
 			System.err.println("You have to specify the configuration file of the Turing Machine at least:");
-			System.err.println("java -jar TMSimulator.jar Samples/TM1.txt [input.txt]");
+			System.err.println("java -jar TMSimulator.jar Samples/TM1.txt {0 | 1} [input.txt]");
 			return;
-		} else if (args.length == 1)
+		} else if (args.length == 2)
 		{
 			System.out.print("Enter input string(separe symbols with whitespaces): ");
 			
 			Scanner scanner = new Scanner(System.in);
-		    inputString = scanner.nextLine();
+		    inputStringRepresentation = scanner.nextLine();
 		    scanner.close();
 		} else
 		{
-			BufferedReader reader = new BufferedReader(new FileReader(args[1]));
-			inputString = reader.readLine();
+			BufferedReader reader = new BufferedReader(new FileReader(args[2]));
+			inputStringRepresentation = reader.readLine();
 			reader.close();
-			System.out.println("Input string: " + inputString);
+			System.out.println("Input string: " + inputStringRepresentation);
 		}
 		
 		TuringMachine TM = TMParser.constructTM(args[0]);
 		
-//		Symbol[] inputStringSymbols = new Symbol[inputString.split("\\s").length];
-//		for (int i = 0; i < inputStringSymbols.length; ++i)
-//			inputStringSymbols[i] = TM.getInputAlphabet().getSymbol(inputString.split("\\s")[i]);
-		//TODO Update "input tape"
+		String[] inputStringSymbols = inputStringRepresentation.split("\\s");
+		ArrayList<Symbol> inputString = new ArrayList<Symbol>();
+		if (!inputStringRepresentation.isEmpty())
+			for (int i = 0; i < inputStringSymbols.length; ++i)
+				inputString.add(TM.getInputAlphabet().getSymbol(inputStringSymbols[i]));
 		
-		System.out.println(TM);
+		System.out.println("\n" + TM);
+		
+		TM.startSimulation(inputString, Integer.parseInt(args[1]) == 1);
 	}
 
 }
